@@ -48,6 +48,14 @@ function App() {
                 ...doc.data(),
                 id: doc.id,
             }));
+            querySnapshot.docChanges().forEach((change) => {
+                if (change.type === "modified") {
+                    console.log(
+                        'Le champ "completed" d\'un document a été modifié :',
+                        change.doc.data()
+                    );
+                }
+            });
             setTodos(todosArr);
         });
         return () => unsubscribe();
